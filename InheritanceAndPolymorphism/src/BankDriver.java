@@ -3,8 +3,8 @@ public class BankDriver {
 
 	public static void main(String[] args) {
 
-		Bank bank = new Bank("CIBC", new Worker("Mark"));
-		
+		Bank2 bank = new Bank2("CIBC", new Worker("Mark"));
+		bank.getBankName();
 		System.out.println( bank.getInfo() );
 		
 	}
