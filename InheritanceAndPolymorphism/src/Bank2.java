@@ -20,4 +20,10 @@ public class Bank2{
 		// System.out.println("Bank -> getInfo()");
 		return _worker.getWorkerName() + " works in " + _name;
 	}
+	
+	@Override
+	public String toString() {
+		
+		return "class Bank2: name = " + _name;
+	}
 }

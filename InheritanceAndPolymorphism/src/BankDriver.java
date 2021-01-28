@@ -7,6 +7,7 @@ public class BankDriver {
 		bank.getBankName();
 		System.out.println( bank.getInfo() );
 		
+		System.out.println( bank );
 	}
 
 }
