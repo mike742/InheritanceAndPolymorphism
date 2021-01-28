@@ -20,6 +20,30 @@ public class VoucherManager {
 		nextVN++;
 	}
 	
+	public void issueCheck(int voucherNumber, String paymentDate) {
+		
+		Voucher v = find(voucherNumber);
+		
+		if( v != null ) {
+			v.setCheck(nextChN, paymentDate);
+			nextChN++;
+		}
+		else {
+			System.out.println("No voucher with number " + voucherNumber);
+		}
+	}
+	
+	public Voucher find(int voucherNumber) {
+		
+		for(Voucher v : _vouchers) {
+			if(v.getVoucherNumber() == voucherNumber) {
+				return v;
+			}
+		}
+		
+		return null;
+	}
+	
 	public void printData() {
 		if(_vouchers.size() == 0) {
 			System.out.println("No data to print");

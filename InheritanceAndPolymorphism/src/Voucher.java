@@ -21,8 +21,13 @@ public class Voucher {
 
 	}
 	
-	private int getVoucherNumber() {
+	public int getVoucherNumber() {
 		return _voucherNumber;
+	}
+	
+	public void setCheck(int checkNumber, String paymentDate) {
+		_checkNumber = checkNumber;
+		_paymentDate = paymentDate;
 	}
 	
 	public void issueCheck(int checkNumber, String paymentDate) {
