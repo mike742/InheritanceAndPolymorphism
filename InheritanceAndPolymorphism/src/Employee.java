@@ -8,10 +8,8 @@ public class Employee {
 	private int _id;
 	private Person _person;
 	private Address _address;
-	private Test _test;
 	
 	public Employee(int id, String name, String address) {
-		
 		_id = id;
 		_person = new Person(name);
 		_address = new Address(address);
