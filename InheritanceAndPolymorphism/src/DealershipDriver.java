@@ -12,9 +12,9 @@ public class DealershipDriver {
 		dsh.addPerson((SalesPerson)sp1);
 		dsh.addPerson((SalesPerson)sp2);
 		
-		dsh.addCar( new Car("Honda Accord") );
-		dsh.addCar( new Car("Honda Civic") );
-		dsh.addCar( new Car("Ford Focus"));
+		dsh.addCar( new Car("Honda Accord", Transmission.Automatic) );
+		dsh.addCar( new Car("Honda Civic", Transmission.Manual) );
+		dsh.addCar( new Car("Ford Focus", Transmission.SemiAutamatic));
 		
 		dsh.printStatus();
 
