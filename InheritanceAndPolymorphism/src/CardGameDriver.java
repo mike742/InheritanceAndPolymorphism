@@ -1,3 +1,4 @@
+import java.util.Random;
 
 enum Suit {
 	Club, Diamond, Heart, Spade;
@@ -47,7 +48,7 @@ class Card {
 		}
 		
 		if (_suit == Suit.Heart || _suit == Suit.Diamond) {
-			res = ANSI_RED + res + ANSI_RESET;
+			res = "\u001B[31m" + res + "\u001B[0m";
 		}
 
 		System.out.print(res + " ");
@@ -55,13 +56,17 @@ class Card {
 }
 
 class GroupOfCards {
-	private Card[] _cards;
+	protected Card[] _cards;
 	private int _currentSize;
 
 	public GroupOfCards(int size) {
 		_cards = new Card[size];
 	}
 
+	public Card[] getCards() {
+		return _cards;
+	}
+	
 	public void addCard(Card card) {
 		for(int i = 0; i < _cards.length; ++i) {
 			if(_cards[i] == null) {
@@ -90,21 +95,35 @@ class Deck extends GroupOfCards {
 	
 	public Deck() {
 		super(TOTAL_CARDS);
-		
+
 		for(int i = 0; i < TOTAL_CARDS / 4; ++i) {
 			addCard(new Card(i + 1, Suit.Club));
 		}
-		
-		// 52 / 4 = 13; 26
+
 		for(int i = TOTAL_CARDS / 4; i < TOTAL_CARDS / 2; ++i) {
 			addCard(new Card(i -  TOTAL_CARDS / 4 + 1, Suit.Diamond) );
 		} 
+		
+		for(int i = TOTAL_CARDS / 2; i < 3 * TOTAL_CARDS / 4; ++i) {
+			addCard(new Card(i -  TOTAL_CARDS / 2 + 1, Suit.Spade) );
+		}
+		
+		for(int i = 3 * TOTAL_CARDS / 4; i < TOTAL_CARDS; ++i) {
+			addCard(new Card(i -  3 * TOTAL_CARDS / 4 + 1, Suit.Heart) );
+		}
 	}
 
 	public void shuffle() {
-		Helper.log();
+		Random rand = new Random();
+		
+		for(int i = 0; i < _cards.length; ++i) {
+			int randomIndexToSwap = rand.nextInt(_cards.length);
+			// System.out.println(randomIndexToSwap);
 
-		return;
+			Card temp = _cards[randomIndexToSwap];
+			_cards[randomIndexToSwap] = _cards[i];
+			_cards[i] = temp;
+		}
 	}
 
 	public Card dealCard() {
@@ -145,9 +164,7 @@ public class CardGameDriver {
 	public static void main(String[] args) {
 
 		Deck d = new Deck();
-		
-		d.display();
-		
+		d.shuffle();
 	}
 
 }
