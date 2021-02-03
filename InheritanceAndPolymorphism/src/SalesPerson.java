@@ -11,4 +11,8 @@ public class SalesPerson extends Person {
 	public double getSales() {
 		return _sales;
 	}
+	
+	public void info()  {
+		System.out.println(super.getName() + " SalesPerson");
+	}
 }

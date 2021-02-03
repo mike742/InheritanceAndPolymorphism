@@ -1,5 +1,5 @@
 // Person #1
-public class Person {
+public abstract class Person {
 	private String _name;
 	
 	public Person(String name) {
@@ -10,4 +10,6 @@ public class Person {
 	public String getName() {
 		return _name;
 	}
+	
+	public abstract void info();
 }

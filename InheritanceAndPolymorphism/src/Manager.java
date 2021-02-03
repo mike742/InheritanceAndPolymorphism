@@ -5,4 +5,8 @@ public class Manager extends Person {
 		super(name);
 		Helper.log();
 	}
+	
+	public void info()  {
+		System.out.println(super.getName() + " manager");
+	}
 }
