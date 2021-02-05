@@ -39,6 +39,13 @@ public class DealershipDriver {
 		dsh.addCar( new Car("Ford Focus", Transmission.SemiAutamatic));
 		
 		dsh.printStatus();
+		
+		for(Person p : pa) {
+			
+			if(p instanceof Manager) {
+				((Manager)p).onlyManagerMethod();
+			}
+		}
 
 	}
 
