@@ -1,3 +1,5 @@
+import java.time.*;
+import java.time.Instant;
 
 public class ErrorHandling {
 
@@ -5,11 +7,12 @@ public class ErrorHandling {
 		System.out.println("funException() called");
 		throw new IllegalAccessException("demo message");
 	}
- 
+
 	public static void main(String[] args) {
 
 		int a = 10, b = 5, c = 4, res;
 		int[] arr = new int[2];
+
 
 		try {
 			funException();
@@ -26,9 +29,9 @@ public class ErrorHandling {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Out Of Bounds!!!");
 		} catch (Exception e) {
-			//System.out.println("Something wrong!");
+			// System.out.println("Something wrong!");
 			System.out.println(e.getClass());
-			System.out.println(e.getMessage()); 
+			System.out.println(e.getMessage());
 		}
 
 		System.out.println("Have a nice day!");
