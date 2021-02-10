@@ -27,13 +27,20 @@ abstract class Employee {
 	}
 
 	public String toString() {
-		return "Employee: " + _name + "\nSocial Security Number: " + _ssn + "\nPaycheck $: " + getEarnings();
+
+		return "\nEmployee: " + _name + "\nSocial Security Number: " + _ssn;
+
+		// String string = String.format("\nPaycheck $: " + getEarnings());
 	}
 
+	/*
+	 * public String toString() { return "Employee: " + _name +
+	 * "\nSocial Security Number: " + _ssn + "\nPaycheck $: " + getEarnings(); }
+	 */
 	public double getBonus() {
 		int currentMonth = 10; // Calendar
 		int currentWeek = 2;
-		double bonus = 0;
+		double bonus = 0; // 22.22
 
 		if (_birthdayMonth == currentMonth && _birthdayWeek == currentWeek) {
 			bonus = 100;
@@ -61,8 +68,8 @@ class Hourly extends Employee {
 	}
 
 	public String toString() {
-		// return super.toString() + "\npaycheck: $" + getEarnings();
-		return super.toString();
+		return super.toString() + "\npaycheck: $" + getEarnings();
+		//return super.toString();
 	}
 
 	@Override
@@ -75,12 +82,12 @@ class Hourly extends Employee {
 }
 
 class Salaried extends Employee {
-	
+
 	private double _weeklySalary;
-	
+
 	public void load() {
 		super.load();
-		
+
 		System.out.print("Salary ==> ");
 		_weeklySalary = Double.parseDouble(_scanner.nextLine());
 
@@ -110,7 +117,7 @@ class SalariedPlusCommission extends Salaried {
 	@Override
 	public double getEarnings() {
 
-		return super.getEarnings() +  _commissionRate * _salesPastWeek;
+		return super.getEarnings() + _commissionRate * _salesPastWeek;
 	}
 
 }
