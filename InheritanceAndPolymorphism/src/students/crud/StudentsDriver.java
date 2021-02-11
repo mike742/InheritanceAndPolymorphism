@@ -164,9 +164,7 @@ public class StudentsDriver {
 			
 			Connection con = 
 					DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
-			
 			Statement stmt = con.createStatement();
-			
 			ResultSet rs = stmt.executeQuery("select * from Students");
 			
 			while(rs.next()) {
