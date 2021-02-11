@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -153,10 +157,35 @@ public class StudentsDriver {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static void loadDataFromDB () {
+		
+		try {
+			
+			Connection con = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+			
+			Statement stmt = con.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("select * from Students");
+			
+			while(rs.next()) {
+				System.out.println( rs.getInt(1)  + " "+ rs.getString(2) + " " +  rs.getString(3) 
+					+ " " + rs.getDouble(4));
+			} 
+			
+			con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		loadDataFromDB();
+		
 		/*
 		 * for (int i = 0; i < 3; ++i) { Student newStudent = new Student();
 		 * newStudent.load();
@@ -164,7 +193,7 @@ public class StudentsDriver {
 		 * add(newStudent); }
 		 */
 		// print();
-
+		/*
 		Student s1 = new Student(101, "mark", "123@abc.com", 222.22);
 		Student s2 = new Student(102, "Lucy", "lucy@abc.com", 333.22);
 		Student s3 = new Student(103, "Mary", "mary@abc.com", 444.22);
@@ -181,7 +210,8 @@ public class StudentsDriver {
 		
 		writeListToFile();
 
-		readListFromFile();
+		readListFromFile();\
+		*/
 
 		/*
 		 * add(s1); add(s2); add(s3);

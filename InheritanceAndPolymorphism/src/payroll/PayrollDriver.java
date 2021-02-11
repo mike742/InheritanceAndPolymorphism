@@ -2,6 +2,7 @@ package payroll;
 
 //import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 //import java.util.Calendar;
 import java.util.Scanner;
 
@@ -38,10 +39,22 @@ abstract class Employee {
 	 * "\nSocial Security Number: " + _ssn + "\nPaycheck $: " + getEarnings(); }
 	 */
 	public double getBonus() {
-		int currentMonth = 10; // Calendar
-		int currentWeek = 2;
+			/*
+		 Calendar calendar = Calendar.getInstance();
+		 System.out.println("current time is: " + calendar.getTime());
+		 System.out.println("current month is: " + (calendar.get(Calendar.MONTH) +
+		 1)); System.out.println("current month week is: " +
+		 calendar.get(Calendar.WEEK_OF_MONTH));
+		 */
+		
+		Calendar calendar = Calendar.getInstance();
+		
+		int currentMonth = calendar.get(Calendar.MONTH) + 1; // 10; // Calendar
+		int currentWeek = calendar.get(Calendar.WEEK_OF_MONTH); //2;
 		double bonus = 0; // 22.22
-
+		
+		System.out.println(" ==> " + currentMonth + " " + currentWeek);
+		
 		if (_birthdayMonth == currentMonth && _birthdayWeek == currentWeek) {
 			bonus = 100;
 		}
@@ -68,8 +81,7 @@ class Hourly extends Employee {
 	}
 
 	public String toString() {
-		return super.toString() + "\npaycheck: $" + getEarnings();
-		//return super.toString();
+		return super.toString() + String.format("\npaycheck: $%.2f", getEarnings());
 	}
 
 	@Override
@@ -125,49 +137,47 @@ class SalariedPlusCommission extends Salaried {
 public class PayrollDriver {
 
 	public static void main(String[] args) {
-		Scanner pd = new Scanner(System.in);
-		Hourly e1 = new Hourly();
-		Salaried s2 = new Salaried();
-		SalariedPlusCommission sc = new SalariedPlusCommission();
-
-//e1.load();
-
-//System.out.println(e1);
-		System.out.println("Enter the number of Employee");
-		int en = Integer.parseInt(pd.nextLine());
-
+		Scanner _scan = new Scanner(System.in);
 		ArrayList<Employee> list = new ArrayList<Employee>();
 
-		for (int i = 0; i < en; i++) {
-			int uc = 1; // ask user to input
-			System.out.println("Profile for Employee #" + (i + 1));
-			System.out.println("Type Hourly (1), Salaried (2), salaried plus Commission (3)");
-			uc = pd.nextInt();
-			pd.nextLine();
-			switch (uc) {
+		System.out.print("Number of employees: ");
+		int numOfEmployees = Integer.parseInt(_scan.nextLine());
+
+		for (int i = 0; i < numOfEmployees; i++) {
+
+			System.out.println("\nPROFILE FOR EMPLOYEE #" + (i + 1));
+			System.out.print(
+					"type Hourly (1), Salaried (2), Salaried plus " + "Commission (3)" + "\nEnter 1, 2, or 3 ==> ");
+
+			int userChoice = Integer.parseInt(_scan.nextLine());
+
+			switch (userChoice) {
+
 			case 1:
-				Employee newEmployee = new Hourly();
-				newEmployee.load();
-				list.add(newEmployee);
+				Employee newHourly = new Hourly();
+				newHourly.load();
+				list.add(newHourly);
 				break;
 
 			case 2:
-				Employee newEmployee1 = new Salaried();
-				newEmployee1.load();
-				list.add(newEmployee1);
+				Employee newSalaried = new Salaried();
+				newSalaried.load();
+				list.add(newSalaried);
 				break;
 
 			case 3:
-				Employee newEmployee2 = new SalariedPlusCommission();
-				newEmployee2.load();
-
-				list.add(newEmployee2);
+				Employee newSalariedPC = new SalariedPlusCommission();
+				newSalariedPC.load();
+				list.add(newSalariedPC);
 				break;
 			}
+
 		}
 		for (Employee e : list) {
 			System.out.println(e);
 		}
+
+		_scan.close();
 
 	}
 }
