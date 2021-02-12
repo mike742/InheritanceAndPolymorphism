@@ -157,11 +157,10 @@ public class StudentsDriver {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+	// R
 	public static void loadDataFromDB () {
 		
 		try {
-			
 			Connection con = 
 					DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
 			Statement stmt = con.createStatement();
@@ -178,11 +177,84 @@ public class StudentsDriver {
 			e.printStackTrace();
 		}
 	}
+	public static void insertDataToDB(int id, String name, String email, double marks) {
+		
+	}
+	//C
+	public static void insertDataToDB(Student newStudent) {
+		
+		try {
+			Connection con = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+			Statement stmt = con.createStatement();
+			
+			// insert into Students(id, firstName, email, marks) values (103, 'John', 'john@abc.com', 444.05);
+			String query = 
+					String.format("insert into Students(id, firstName, email, marks) values "
+					+ "(%s, '%s', '%s', %s)", newStudent.getId(), newStudent.getName(), 
+					newStudent.getEMail(), newStudent.getMarks());
+			
+			stmt.executeUpdate(query);
+			
+			con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static void updateDataToDB(Student s) {
+		
+		try {
+			Connection con = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+			Statement stmt = con.createStatement();
 
+			String query = 
+					String.format("update Students set firstName='%s', email='%s', marks=%s where id=%s ",
+							s.getName(), s.getEMail(), s.getMarks(), s.getId());
+			
+			stmt.executeUpdate(query); // insert, update and delete
+			
+			con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void deleteDataToDB(int id) {
+		
+		try {
+			Connection con = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+			Statement stmt = con.createStatement();
+			
+			// delete from Students where id = 103;
+			String query = "delete from Students where id=" + id;
+			
+			stmt.executeUpdate(query); // insert, update and delete
+			
+			con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		loadDataFromDB();
+		//loadDataFromDB();
+		
+		// insertDataToDB(new Student(105, "Steve", "steve@abc.com", 777.55)); 
+		// updateDataToDB(new Student(104, "Mark Smith", "smith.mark@abc.com", 545.55));
+		deleteDataToDB(104);
+		
+		loadDataFromDB();  
+		
 		
 		/*
 		 * for (int i = 0; i < 3; ++i) { Student newStudent = new Student();
